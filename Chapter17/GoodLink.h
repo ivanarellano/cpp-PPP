@@ -1,24 +1,35 @@
 #pragma once
 #include <string>
 
-struct Link {
-	Link(const std::string& v, Link* p = nullptr, Link* s = nullptr)
-		: value{ v }
+class GoodLink {
+public:
+	GoodLink(const std::string& v, GoodLink* p = nullptr, GoodLink* s = nullptr)
+		: value{ v }, prev{ p }, succ{ s }
 	{}
 
 	std::string value;
 
-	Link* insert(Link* n);
-	Link* add(Link* n);
-	Link* erase();
-	Link* find(const std::string& s);
-	const Link* find(const std::string& s) const;
+	// insert n before this object
+	GoodLink* insert(GoodLink* n);
 
-	Link* advance(int n) const;
+	// insert n after this object
+	GoodLink* add(GoodLink* n);
 
-	Link* next() const { return succ; }
-	Link* previous() const { return prev; }
+	// remove this object from list
+	GoodLink* erase();
+
+	// find s in list
+	GoodLink* find(const std::string& s);
+
+	// find s in const list (see ch 18.5.1)
+	const GoodLink* find(const std::string& s) const;
+
+	// move n positions in list
+	GoodLink* advance(int n) const;
+
+	GoodLink* next() const { return succ; }
+	GoodLink* previous() const { return prev; }
 private:
-	Link* prev;
-	Link* succ;
+	GoodLink* prev;
+	GoodLink* succ;
 };
