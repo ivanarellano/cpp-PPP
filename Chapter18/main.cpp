@@ -1,5 +1,6 @@
 #include "Link.h"
 #include "GoodLink.h"
+#include "vector.h"
 #include <iostream>
 
 void keep_window_open()
@@ -99,11 +100,25 @@ void ch_17_10()
 	std::cout << std::endl;
 }
 
+void ch_18_2()
+{
+	vector v1 = { 1, 2, 3 };
+	vector v2(3);
+
+	vector v3(3);
+	v3.set(2, 2.2);
+	vector v4 = v3;
+}
+
 int main()
 {
 	ch_17_9_5();
 	std::cout << std::endl;
+
 	ch_17_10();
+	std::cout << std::endl;
+
+	ch_18_2();
 
 	keep_window_open();
 
