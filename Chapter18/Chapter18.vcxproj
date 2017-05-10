@@ -139,6 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GoodLink.h" />
+    <ClInclude Include="Link.h" />
+    <ClInclude Include="vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GoodLink.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
