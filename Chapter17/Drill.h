@@ -123,3 +123,82 @@ void drill_10()
 	std::cout << "Print std::vector<int> d8(20)" << std::endl;
 	print_vector(d8);
 }
+
+/* BEGIN DRILLS PART 2 */
+
+void drill_p2_1_13()
+{
+	std::cout << "Drill p2 1-13" << std::endl;
+
+	// 1.
+	int* seven = new int{ 7 };
+	int* p1 = seven;
+
+	// 2.
+	std::cout << *p1 << " " << *seven << std::endl;
+
+	// 3.
+	int seven_sz{ 7 };
+	int* seven_arr = new int[seven_sz];
+	for (int i = 0; i < seven_sz; ++i)
+		seven_arr[i] = 1 + i;
+
+	int* p2 = seven_arr;
+
+	// 4.
+	print_array(std::cout, p2, seven_sz);
+
+	// 5.
+	int* p3 = p2;
+
+	// 6.
+	p1 = p2;
+
+	// 7.
+	p3 = p2;
+
+	// 8.
+	std::cout << std::endl;
+	print_array(std::cout, p1, 7);
+	std::cout << std::endl;
+	print_array(std::cout, p2, 7);
+	std::cout << std::endl;
+
+	// 9.
+	delete[] seven;
+	delete[] seven_arr;
+
+	// 10.
+	int ten_sz{ 10 };
+	int* ten_arr = new int[ten_sz];
+	for (int i = 0; i < ten_sz; ++i)
+		ten_arr[i] = 2 * (i + 1);
+	p1 = ten_arr;
+
+	// 11.
+	int* ten_2_arr = new int[ten_sz];
+	p2 = ten_2_arr;
+
+	std::cout << "p2 pointer: Before copying p1 into p2" << std::endl;
+	print_array(std::cout, p2, 10);
+	std::cout << std::endl;
+
+	// 12.
+	// MSVC Warning: http://stackoverflow.com/questions/42003997/c-array-copy-showing-errors-in-vc
+	std::copy(p1, p1 + ten_sz, p2);
+
+	std::cout << "p2 pointer: After copy " << std::endl;
+	print_array(std::cout, p2, 10);
+	std::cout << std::endl;
+
+	// 13.
+	std::vector<int> d13_1(10);
+	for (unsigned int i = 0; i < d13_1.size(); ++i)
+		d13_1[i] = 2 * (i + 1);
+
+	std::vector<int> d13_2(10);
+	d13_2 = d13_1;
+
+	print_vector(d13_2);
+	std::cout << std::endl;
+}

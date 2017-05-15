@@ -100,6 +100,9 @@ int main()
 	drill_10();
 	std::cout << std::endl;
 
+	drill_p2_1_13();
+	std::cout << std::endl;
+
 	keep_window_open();
 	return 0;
 }
