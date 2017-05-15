@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="GoodLink.h" />
     <ClInclude Include="Link.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

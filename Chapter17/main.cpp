@@ -1,40 +1,9 @@
-#include "Link.h"
-#include "GoodLink.h"
-#include <iostream>
-
-void keep_window_open()
-{
-	char ch;
-	std::cout << "Enter a key and enter to exit.";
-	std::cin >> ch;
-}
-
-void print_all(Link* p)
-{
-	std::cout << "{";
-
-	while (p) {
-		std::cout << p->value;
-		if (p = p->succ) std::cout << ", ";
-	}
-
-	std::cout << "}";
-}
-
-void print_all(GoodLink* p)
-{
-	std::cout << "{";
-
-	while (p) {
-		std::cout << p->value;
-		if (p = p->next()) std::cout << ", ";
-	}
-
-	std::cout << "}";
-}
+#include "Utils.h"
 
 void ch_17_9_5()
 {
+	std::cout << "ch_17_9_5()" << std::endl;
+
 	Link* norse_gods = new Link{ "Thor" };
 	norse_gods = insert(norse_gods, new Link{ "Odin" });
 	norse_gods = insert(norse_gods, new Link{ "Zeus" });
@@ -72,6 +41,8 @@ void ch_17_9_5()
 
 void ch_17_10()
 {
+	std::cout << "ch_17_10()" << std::endl;
+
 	GoodLink* norse_gods = new GoodLink{ "Thor" };
 	norse_gods = norse_gods->insert(new GoodLink{ "Odin" });
 	norse_gods = norse_gods->insert(new GoodLink{ "Zeus" });
@@ -102,10 +73,15 @@ void ch_17_10()
 int main()
 {
 	ch_17_9_5();
+	
 	std::cout << std::endl;
+
 	ch_17_10();
 
-	keep_window_open();
+	std::cout << std::endl;
 
+
+
+	keep_window_open();
 	return 0;
 }
