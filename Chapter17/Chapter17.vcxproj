@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drill.h" />
+    <ClInclude Include="Exercise.h" />
     <ClInclude Include="GoodLink.h" />
     <ClInclude Include="Link.h" />
     <ClInclude Include="Utils.h" />

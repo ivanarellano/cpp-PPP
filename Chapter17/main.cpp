@@ -1,5 +1,6 @@
 #include "Utils.h"
 #include "Drill.h"
+#include "Exercise.h"
 
 void ch_17_9_5()
 {
@@ -71,14 +72,8 @@ void ch_17_10()
 	std::cout << std::endl;
 }
 
-int main()
+void drills()
 {
-	ch_17_9_5();
-	std::cout << std::endl;
-
-	ch_17_10();
-	std::cout << std::endl;
-
 	drill_1_3();
 	std::cout << std::endl;
 
@@ -102,6 +97,27 @@ int main()
 
 	drill_p2_1_13();
 	std::cout << std::endl;
+}
+
+void chapter()
+{
+	ch_17_9_5();
+	std::cout << std::endl;
+
+	ch_17_10();
+	std::cout << std::endl;
+}
+
+int main()
+{
+	ex_1();
+	ex_2();
+
+	char hello_world[] = "Hello, World!";
+	to_lower(hello_world);
+
+	const char* a = findx("Test a thing, another thing", "thing");
+	std::cout << a << std::endl;
 
 	keep_window_open();
 	return 0;
