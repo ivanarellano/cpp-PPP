@@ -1,4 +1,5 @@
 #include "Utils.h"
+#include "Drill.h"
 
 void ch_17_9_5()
 {
@@ -73,14 +74,31 @@ void ch_17_10()
 int main()
 {
 	ch_17_9_5();
-	
 	std::cout << std::endl;
 
 	ch_17_10();
-
 	std::cout << std::endl;
 
+	drill_1_3();
+	std::cout << std::endl;
 
+	drill_4();
+	std::cout << std::endl;
+
+	drill_5();
+	std::cout << std::endl;
+
+	drill_6();
+	std::cout << std::endl;
+
+	drill_7();
+	std::cout << std::endl;
+
+	drill_8();
+	std::cout << std::endl;
+
+	drill_10();
+	std::cout << std::endl;
 
 	keep_window_open();
 	return 0;
