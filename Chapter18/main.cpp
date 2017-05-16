@@ -1,124 +1,103 @@
-#include "Link.h"
-#include "GoodLink.h"
+#include "Utils.h"
+#include "Chapter.h"
 #include "vector.h"
-#include <iostream>
+#include <vector>
+#include <string>
 
-void keep_window_open()
-{
-	char ch;
-	std::cout << "Enter a key and enter to exit.";
-	std::cin >> ch;
+//X glob(2);
+//X glob{ 3 };
+
+X copy(X a) { return a; }
+
+X copy2(X a) 
+{ 
+	X aa{ a }; // copy assign
+	return aa;
 }
 
-void print_all(Link* p)
+X& ref_to(X& a) { return a; }
+
+X* make(int i)
 {
-	std::cout << "{";
-
-	while (p) {
-		std::cout << p->value;
-		if (p = p->succ) std::cout << ", ";
-	}
-
-	std::cout << "}";
+	X a(i);
+	return new X(a);
 }
 
-void print_all(GoodLink* p)
+struct XX
 {
-	std::cout << "{";
+	X a;
+	X b;
+};
 
-	while (p) {
-		std::cout << p->value;
-		if (p = p->next()) std::cout << ", ";
-	}
-
-	std::cout << "}";
-}
-
-void ch_17_9_5()
+void try_this()
 {
-	Link* norse_gods = new Link{ "Thor" };
-	norse_gods = insert(norse_gods, new Link{ "Odin" });
-	norse_gods = insert(norse_gods, new Link{ "Zeus" });
-	norse_gods = insert(norse_gods, new Link{ "Freia" });
-	// N: "Freia" -> "Zeus" -> "Odin" -> "Thor"
-
-	Link* greek_gods = new Link{ "Hera" };
-	greek_gods = insert(greek_gods, new Link{ "Athena" });
-	greek_gods = insert(greek_gods, new Link{ "Mars" });
-	greek_gods = insert(greek_gods, new Link{ "Poseidon" });
-	// G: "Poseidon" -> "Mars" -> "Athena" -> "Hera"
-
-	Link* p = find(greek_gods, "Mars");
-	if (p) p->value = "Ares";
-	// G: "Poseidon" -> "Ares" -> "Athena" -> "Hera"
-
-	Link* p2 = find(norse_gods, "Zeus");
-	if (p2) {
-		// if we're erasing pointer to norse_gods,
-		// set norse_gods pointer to next link
-		if (p2 == norse_gods) norse_gods = p2->succ;
-
-		erase(p2);
-		greek_gods = insert(greek_gods, p2);
-	}
-	// N: "Freia" -> "Odin" -> "Thor
-	// G: "Zeus" -> "Poseidon" -> "Ares" -> "Athena" -> "Hera"
-
-	print_all(norse_gods);
+	X loc{ 4 };          // X(int) .. ~X()
 	std::cout << std::endl;
 
-	print_all(greek_gods);
-	std::cout << std::endl;
-}
-
-void ch_17_10()
-{
-	GoodLink* norse_gods = new GoodLink{ "Thor" };
-	norse_gods = norse_gods->insert(new GoodLink{ "Odin" });
-	norse_gods = norse_gods->insert(new GoodLink{ "Zeus" });
-	norse_gods = norse_gods->insert(new GoodLink{ "Freia" });
-
-	GoodLink* greek_gods = new GoodLink{ "Hera" };
-	greek_gods = greek_gods->insert(new GoodLink{ "Athena" });
-	greek_gods = greek_gods->insert(new GoodLink{ "Mars" });
-	greek_gods = greek_gods->insert(new GoodLink{ "Poseidon" });
-
-	GoodLink* p = greek_gods->find("Mars");
-	if (p) p->value = "Ares";
-
-	GoodLink* p2 = norse_gods->find("Zeus");
-	if (p2) {
-		if (p2 == norse_gods) norse_gods = p2->next();
-		p2->erase();
-		greek_gods = greek_gods->insert(p2);
-	}
-
-	print_all(norse_gods);
+	X loc2{ loc };       // X(X&) .. ~X()
 	std::cout << std::endl;
 
-	print_all(greek_gods);
+	loc = X{ 5 };        // X(int) .. X::operator= .. ~X()
+	std::cout << std::endl;
+
+	loc2 = copy(loc);    // X(X&) x2 .. ~X() x2
+	std::cout << std::endl;
+
+	loc2 = copy2(loc);   // X(X&) x3 .. ~X() x3
+	std::cout << std::endl;
+
+	X loc3{ 6 };         // X(int) .. ~X()
+	std::cout << std::endl;
+
+	X& r = ref_to(loc3); // no ctor or dtor are called
+	std::cout << std::endl;
+
+	delete make(7);      // X(int) .. X(&) .. ~X() .. ~X()
+	std::cout << std::endl;
+
+	delete make(8);      // X(int) .. X(&) .. ~X() .. ~X()
+	std::cout << std::endl;
+
+	std::vector<X> v(4); // X(int) x4, ~X() x4
+	std::cout << std::endl;
+
+	XX loc4;             // X(int) x2
+	std::cout << std::endl;
+
+	X* p = new X{ 9 };   // X(int)
+	std::cout << std::endl;
+
+	delete p;            // ~X()
+	std::cout << std::endl;
+
+	X* pp = new X[5];    // X(int) x5
+	std::cout << std::endl;
+
+	delete[] pp;        // ~X() x5
 	std::cout << std::endl;
 }
 
-void ch_18_2()
+void try_this_2()
 {
-	vector v1 = { 1, 2, 3 };
-	vector v2(3);
+	vector v{ 10 };
+	//double x = *v[2];
+	//v[3] = x; // error: expression must be a modifiable lvalue
 
-	vector v3(3);
-	v3.set(2, 2.2);
-	vector v4 = v3;
+	for (int i = 0; i < v.size(); ++i)
+	{
+		v[i] = i;
+		std::cout << v[i] << std::endl;
+	}
 }
 
 int main()
 {
-	ch_17_9_5();
-	std::cout << std::endl;
+	//chapter();
 
-	ch_17_10();
-	std::cout << std::endl;
+	//try_this();
+	//try_this_2();
 
-	ch_18_2();
+	ch_18_7_3();
 
 	keep_window_open();
 
