@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Chapter.h" />
+    <ClInclude Include="Drill.h" />
     <ClInclude Include="GoodLink.h" />
     <ClInclude Include="Link.h" />
     <ClInclude Include="Utils.h" />
