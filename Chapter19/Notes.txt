@@ -1,0 +1,15 @@
+Create mock sigunatures for ...
+
+1) Copy ctor
+2) Copy assignment
+3) Move ctor
+4) Move assignment
+5) Subscript const
+6) Subscript non-const
+
+1) X(const X& src)
+2) X& operator=(const X& src)
+3) X(X&& src)
+4) X& operator=(X&& src)
+5) <type>& operator[](int n)
+6) <type> operator[] const (int n)
