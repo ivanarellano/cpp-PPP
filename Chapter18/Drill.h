@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 int ga[]{ 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
 
@@ -24,4 +25,22 @@ void f(int arr[], int sz)
 	}
 
 	delete[] p;
+}
+
+std::vector<int> gv{ 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
+
+void f(const std::vector<int>& v)
+{
+	std::vector<int> lv(v.size());
+	lv = gv;
+
+	for (auto i : lv)
+		std::cout << i << " ";
+
+	std::cout << std::endl;
+
+	std::vector<int> lv2{ v };
+
+	for (auto i : lv2)
+		std::cout << i << " ";
 }
