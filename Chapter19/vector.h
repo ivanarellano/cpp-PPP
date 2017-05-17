@@ -2,13 +2,14 @@
 #include <initializer_list>
 #include <algorithm>
 
+template<typename T>
 class vector {
 public:
 	vector() : sz{ 0 }, elem{ nullptr }, space{ 0 } {}
 
 	explicit vector(int s) 
 		: sz{ s }
-		, elem{ new double[s] }
+		, elem{ new T[s] }
 		, space{ s }
 	{
 		for (int i = 0; i < sz; ++i) elem[i] = 0;
@@ -16,9 +17,10 @@ public:
 
 	// size_t to int cast note: 
 	// http://www.embedded.com/electronics-blogs/programming-pointers/4026076/Why-size-t-matters
-	vector(std::initializer_list<double>lst) 
+	vector(std::initializer_list<T> lst) 
 		: sz{ static_cast<int>(lst.size()) }
-		, elem{ new double[sz] }
+		, elem{ new T[sz] }
+		, space{ lst.size() }
 	{
 		std::copy(lst.begin(), lst.end(), elem);
 	}
@@ -26,7 +28,7 @@ public:
 	// copy ctor
 	vector(const vector& src) 
 		: sz { src.sz }
-		, elem{ new double[src.sz] }
+		, elem{ new T[src.sz] }
 		, space{ src.space }
 	{
 		std::copy(src.elem, src.elem + sz, elem);
@@ -58,7 +60,7 @@ public:
 			return *this;
 		}
 
-		double* p_new_elem = new double[src.sz];            // allocate source sized space
+		T* p_new_elem = new T[src.sz];            // allocate source sized space
 		std::copy(src.elem, src.elem + src.sz, p_new_elem); // copy source elements into new elements allocation
 		delete[] elem;                                      // delete the old/unused elements
 		sz = src.sz;
@@ -82,16 +84,16 @@ public:
 		return *this;
 	}
 
-	int capacity() const { return space; }
-	int size() const { return sz; }
+	T& operator[](int n) { return elem[n]; }             // non-const
+	const T& operator[](int n) const { return elem[n]; } // const
 
-	double& operator[](int n) { return elem[n]; }      // non-const
-	double operator[](int n) const { return elem[n]; } // const
+	int size() const { return sz; }
+	int capacity() const { return space; }
 
 	void reserve(int newalloc)
 	{
 		if (newalloc <= space) return;
-		double* new_elem = new double[newalloc];
+		T* new_elem = new T[newalloc];
 		for (int i = 0; i < sz; ++i) new_elem[i] = elem[i];
 		delete[] elem;
 		elem = new_elem;
@@ -102,9 +104,7 @@ public:
 	// initialize each new element with the default value 0.0
 	void resize(int newsize)
 	{
-		//pg 674 PPP - "try this"
-		//if (newsize <= space) return;
-		//if (newsize <= sz && newsize >= space) return;
+		// pg 674 PPP - "try this"
 
 		reserve(newsize);
 		for (int i = sz; i < newsize; ++i) elem[i] = 0;
@@ -112,7 +112,7 @@ public:
 	}
 
 	// increase vector size by one; initialize the new element with d
-	void push_back(double d)
+	void push_back(const T& d)
 	{
 		if (space == 0)
 			reserve(8);
@@ -124,6 +124,6 @@ public:
 	}
 private:
 	int sz;
-	double* elem;
+	T* elem;
 	int space;
 };
