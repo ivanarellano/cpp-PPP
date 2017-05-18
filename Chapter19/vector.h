@@ -1,15 +1,19 @@
 #pragma once
 #include <initializer_list>
 #include <algorithm>
+#include <memory>
 
-template<typename T>
+// For C++14
+// template<Element T>  // for all types T, such that Element<T>() is true
+
+template<typename Elem, typename A = std::allocator<Elem>> // requires Element<Elem>()
 class vector {
 public:
 	vector() : sz{ 0 }, elem{ nullptr }, space{ 0 } {}
 
 	explicit vector(int s) 
 		: sz{ s }
-		, elem{ new T[s] }
+		, elem{ new Elem[s] }
 		, space{ s }
 	{
 		for (int i = 0; i < sz; ++i) elem[i] = 0;
@@ -17,9 +21,9 @@ public:
 
 	// size_t to int cast note: 
 	// http://www.embedded.com/electronics-blogs/programming-pointers/4026076/Why-size-t-matters
-	vector(std::initializer_list<T> lst) 
+	vector(std::initializer_list<Elem> lst) 
 		: sz{ static_cast<int>(lst.size()) }
-		, elem{ new T[sz] }
+		, elem{ new Elem[sz] }
 		, space{ lst.size() }
 	{
 		std::copy(lst.begin(), lst.end(), elem);
@@ -28,7 +32,7 @@ public:
 	// copy ctor
 	vector(const vector& src) 
 		: sz { src.sz }
-		, elem{ new T[src.sz] }
+		, elem{ new Elem[src.sz] }
 		, space{ src.space }
 	{
 		std::copy(src.elem, src.elem + sz, elem);
@@ -60,7 +64,7 @@ public:
 			return *this;
 		}
 
-		T* p_new_elem = new T[src.sz];            // allocate source sized space
+		Elem* p_new_elem = new Elem[src.sz];            // allocate source sized space
 		std::copy(src.elem, src.elem + src.sz, p_new_elem); // copy source elements into new elements allocation
 		delete[] elem;                                      // delete the old/unused elements
 		sz = src.sz;
@@ -84,8 +88,8 @@ public:
 		return *this;
 	}
 
-	T& operator[](int n) { return elem[n]; }             // non-const
-	const T& operator[](int n) const { return elem[n]; } // const
+	Elem& operator[](int n) { return elem[n]; }             // non-const
+	const Elem& operator[](int n) const { return elem[n]; } // const
 
 	int size() const { return sz; }
 	int capacity() const { return space; }
@@ -93,37 +97,40 @@ public:
 	void reserve(int newalloc)
 	{
 		if (newalloc <= space) return;
-		T* new_elem = new T[newalloc];
-		for (int i = 0; i < sz; ++i) new_elem[i] = elem[i];
-		delete[] elem;
+		Elem* new_elem = alloc.allocate(newalloc);
+		for (int i = 0; i < sz; ++i) alloc.construct(&new_elem[i], elem[i]);
+		for (int i = 0; i < sz; ++i) alloc.destroy(&elem[i]);
+		alloc.deallocate(elem, space);
 		elem = new_elem;
 		space = newalloc;
 	}
 
 	// make the vector have newsize elements
 	// initialize each new element with the default value 0.0
-	void resize(int newsize)
+	void resize(int newsize, Elem val = Elem())
 	{
 		// pg 674 PPP - "try this"
 
 		reserve(newsize);
-		for (int i = sz; i < newsize; ++i) elem[i] = 0;
+		for (int i = sz; i < newsize; ++i) alloc.construct(&elem[i], val);
+		for (int i = newsize; i < sz; ++i) alloc.destroy(&elem[i]);
 		sz = newsize;
 	}
 
 	// increase vector size by one; initialize the new element with d
-	void push_back(const T& d)
+	void push_back(const Elem& val)
 	{
 		if (space == 0)
 			reserve(8);
 		else if (sz == space)
 			reserve(space * 2);
 
-		elem[sz] = d;
+		alloc.construct(&elem[sz], val);
 		++sz;
 	}
 private:
 	int sz;
-	T* elem;
+	Elem* elem;
 	int space;
+	A alloc; // use allocate to handle memory for elements
 };

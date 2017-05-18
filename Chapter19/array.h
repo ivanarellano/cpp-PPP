@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 template<typename T, int N>
 struct array
@@ -11,5 +12,13 @@ struct array
 	T* data() { return elem; }
 	const T* data() const { return elem; }
 
-	int size() { return N; }
+	int size() const { return N; }
 };
+
+
+template<typename T, int N>
+void fill(array<T, N>& b, const T& val)
+{
+	for (int i = 0; i < N; ++i)
+		b[i] = val;
+}
