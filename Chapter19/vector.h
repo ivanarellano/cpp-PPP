@@ -6,6 +6,26 @@
 // For C++14
 // template<Element T>  // for all types T, such that Element<T>() is true
 
+struct out_of_range {};
+
+template<typename T, typename A>
+struct vector_base {
+	A alloc;  // allocator
+	T* elem;  // start of allocation
+	int sz;
+	int space;
+
+	vector_base(const A& a, int n)
+		: alloc{ a }
+		, elem{ alloc.allocate(n) }
+		, sz{ n }
+		, sz{ n }
+	{
+	}
+
+	~vector_base() { alloc.deallocate(elem, space); }
+};
+
 template<typename Elem, typename A = std::allocator<Elem>> // requires Element<Elem>()
 class vector {
 public:
@@ -88,8 +108,21 @@ public:
 		return *this;
 	}
 
-	Elem& operator[](int n) { return elem[n]; }             // non-const
-	const Elem& operator[](int n) const { return elem[n]; } // const
+	// non-const
+	Elem& at(int n)
+	{
+		if (n < 0 || n >= sz) throw out_of_range();
+		return elem[n];
+	}
+
+	// const
+	const Elem& at(int n) const { return at(n); }
+
+	// non-const
+	Elem& operator[](int n) { return elem[n]; }
+
+	// const
+	const Elem& operator[](int n) const { return elem[n]; }
 
 	int size() const { return sz; }
 	int capacity() const { return space; }
