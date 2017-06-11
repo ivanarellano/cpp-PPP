@@ -27,7 +27,7 @@ struct vector_base {
 };
 
 template<typename Elem, typename A = std::allocator<Elem>> // requires Element<Elem>()
-class vector {
+class vector : private vector_base<Elem, A> {
 public:
 	vector() : sz{ 0 }, elem{ nullptr }, space{ 0 } {}
 

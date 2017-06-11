@@ -58,7 +58,7 @@ int main()
 	for (int i = 0; i < vn.size(); ++i)
 		std::cout << vn[i].i << " ";
 
-	std::cout << std::endl << std::endl;
+	std::cout << std::endl;
 
 	vector<int> vii;
 	vii.push_back(1);
