@@ -18,26 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="fltk.h" />
-    <ClInclude Include="Graph.h" />
-    <ClInclude Include="GUI.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="Simple_window.h" />
-    <ClInclude Include="std_lib_facilities.h" />
-    <ClInclude Include="Window.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="GUI.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Simple_window.cpp" />
-    <ClCompile Include="Window.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{DD52FEAB-0FBC-4EA2-8E41-F66E0162F298}</ProjectGuid>
+    <ProjectGuid>{1EEEFBF3-D826-46EF-B355-975DA652D4E1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Chapter14</RootNamespace>
+    <RootNamespace>Chapter12</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -141,10 +125,11 @@
       <AdditionalIncludeDirectories>C:\libs\fltk-1.3.4-1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>fltk.lib;wsock32.lib;comctl32.lib;fltkjpeg.lib;fltkimages.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\libs\fltk-1.3.4-1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -166,6 +151,22 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="fltk.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="GUI.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Simple_window.h" />
+    <ClInclude Include="std_lib_facilities.h" />
+    <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ch12_drill.cpp" />
+    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="Simple_window.cpp" />
+    <ClCompile Include="Window.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
