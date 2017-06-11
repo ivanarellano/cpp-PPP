@@ -140,12 +140,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MonsterParser.cpp" />
+    <ClCompile Include="MonsterWriter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\code_snippets\std_lib_facilities.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="MonsterParser.h" />
+    <ClInclude Include="MonsterWriter.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="monsters.txt" />
+    <Text Include="readings.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
