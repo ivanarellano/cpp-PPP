@@ -1,10 +1,10 @@
+#include "work_selection.h"
 #include <iostream>
 #include "vector.h"
 #include "array.h"
 #include "Utils.h"
 
-int main()
-{
+int Chapter::main() {
 	vector<int> v;
 
 	for (int i = 0; i < 10; ++i)
@@ -49,7 +49,7 @@ int main()
 
 	struct No_default {
 		int i;
-		No_default(int i) : i{i} {}
+		No_default(int i) : i{ i } {}
 	};
 
 	vector<No_default> vn;
@@ -71,6 +71,5 @@ int main()
 	}
 
 	keep_window_open();
-
 	return 0;
 }

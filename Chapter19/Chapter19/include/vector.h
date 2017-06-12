@@ -19,7 +19,7 @@ struct vector_base {
 		: alloc{ a }
 		, elem{ alloc.allocate(n) }
 		, sz{ n }
-		, sz{ n }
+		, space{ n }
 	{
 	}
 
@@ -27,7 +27,7 @@ struct vector_base {
 };
 
 template<typename Elem, typename A = std::allocator<Elem>> // requires Element<Elem>()
-class vector : private vector_base<Elem, A> {
+class vector {
 public:
 	vector() : sz{ 0 }, elem{ nullptr }, space{ 0 } {}
 
@@ -131,12 +131,29 @@ public:
 	{
 		if (newalloc <= space) return;
 		Elem* new_elem = alloc.allocate(newalloc);
-		for (int i = 0; i < sz; ++i) alloc.construct(&new_elem[i], elem[i]);
+		for (int i = 0; i < sz; ++i) alloc.construct(&new_elem[i], elem[i]); // copy
 		for (int i = 0; i < sz; ++i) alloc.destroy(&elem[i]);
 		alloc.deallocate(elem, space);
 		elem = new_elem;
 		space = newalloc;
 	}
+
+	/*
+	void reserve(int newalloc)
+	{
+		if (newalloc <= this->space) return;
+
+		vector_base<Elem, A> b{ this->alloc.allocate(newalloc) }; // allocate new space
+		std::uninitialized_copy(b.elem, &b.elem[this->sz], this->elem); // copy
+
+		// destroy old
+		for (int i = 0; i < this->sz; ++i) 
+			this->alloc.destroy(&this->elem[i]);
+
+		// swap representations
+		std::swap<vector_base<Elem, A>>(*this, b);
+	}
+	*/
 
 	// make the vector have newsize elements
 	// initialize each new element with the default value 0.0
