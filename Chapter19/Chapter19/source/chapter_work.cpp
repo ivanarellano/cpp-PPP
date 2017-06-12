@@ -4,7 +4,8 @@
 #include "array.h"
 #include "Utils.h"
 
-int Chapter::main() {
+int Chapter::main() 
+{
 	vector<int> v;
 
 	for (int i = 0; i < 10; ++i)
