@@ -61,11 +61,11 @@ void read_val(T& v)
 
 /// 14
 template<typename T>
-std::ostream& operator<<(std::ostream& os, std::vector<T> vec) 
+std::ostream& operator<<(std::ostream& os, std::vector<T>& vec) 
 {
 	os << "{ ";
 
-	for (int i = 0; i < vec.size(); ++i) 
+	for (unsigned int i = 0; i < vec.size(); ++i) 
 	{
 		os << vec[i];
 		if (i < vec.size() - 1) os << ",";
@@ -77,29 +77,31 @@ std::ostream& operator<<(std::ostream& os, std::vector<T> vec)
 }
 
 template<typename T>
-std::istream& operator>>(std::istream& is, std::vector<T> vec) 
+std::istream& operator>>(std::istream& is, std::vector<T>& vec) 
 {
 	char c1;
 	char c2;
 
-	is >> c1;
-	if (!is) return is;
-
-	if (c1 != '{' ||) 
+	if (is >> c1 && c1 != '{') 
 	{
-		is.clear(ios_base::failbit);
+		is.unget();
+		is.clear(std::ios_base::failbit);
 		return is;
 	}
 
 	T tmp;
-	while (cin >> tmp >> ch2 && ch2 != ',') 
+	/// 1,
+	while (true)
 	{
+		is >> tmp >> c2;
+		if (!is || c2 != ',') break;
 		vec.push_back(tmp);
 	}
 
-	if (ch2 != '}') 
+	if (c2 != '}') 
 	{
-		is.clear(ios_base::failbit);
+		is.unget();
+		is.clear(std::ios_base::failbit);
 		return is;
 	}
 
@@ -124,17 +126,20 @@ int Drill::main()
 		<< my_string.get() << std::endl;
 	std::cout << my_vect.get()[0] << my_vect.get()[1] << std::endl;
 
-	read_val(my_int);
-	read_val(my_char);
-	read_val(my_double);
+	//read_val(my_int);
+	//read_val(my_char);
+	//read_val(my_double);
 
-	/// print all again
-	std::cout << my_int.get() << std::endl
-		<< my_char.get() << std::endl
-		<< my_double.get() << std::endl;
+	///// print all again
+	//std::cout << my_int.get() << std::endl
+	//	<< my_char.get() << std::endl
+	//	<< my_double.get() << std::endl;
 
-	/// print vector
-	std::cout << my_vect.get() << std::endl << std::endl;
+	///// print vector
+	//std::cout << my_vect.get() << std::endl << std::endl;
+
+	std::cout << "Enter a vector in format { val, val, val }" << std::endl;
+	std::cin >> my_vect.get();
 
 	keep_window_open();
 	return 0;
