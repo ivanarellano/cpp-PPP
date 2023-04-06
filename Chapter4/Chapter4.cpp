@@ -101,18 +101,21 @@ std::vector<int> prime;
 
 bool is_prime(int num)
 {
+	int count = 0;
 	for (auto p : prime)
 	{
 		if (num % p == 0) return false;
+		++count;
 	}
-	return true;
+	std::cout << "Iterated " << count << " times for " << num << std::endl;
+	return true; // not divisible by smaller primes
 }
 
 void print_primes(int max)
 {
 	prime.push_back(2);
 
-	for (int i = 3; i <= 100; ++i)
+	for (int i = 3; i <= max; ++i)
 	{
 		if (is_prime(i))
 		{
@@ -120,6 +123,7 @@ void print_primes(int max)
 		}
 	}
 
+	std::cout << "Total primes found: " << prime.size() << std::endl;
 	for (const auto& p : prime)
 	{
 		std::cout << p << ", ";
@@ -130,7 +134,7 @@ void print_primes(int max)
 
 void exercise_twelve() 
 {
-	print_primes(200);
+	print_primes(50);
 }
 
 void exercise_thirteen()
@@ -158,7 +162,8 @@ void exercise_thirteen()
 
 int main()
 {
-	exercise_thirteen();
+	exercise_twelve();
+	//exercise_thirteen();
 
 	return 0;
 }
