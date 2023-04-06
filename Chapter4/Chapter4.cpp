@@ -139,11 +139,14 @@ void exercise_twelve()
 
 void exercise_thirteen()
 {
+	// reference: https://mathstats.uncg.edu/sites/pauli/112/HTML/seceratosthenes.html
+
 	int max = 100;
 	std::vector<char> sieve(max+1);
 	for (int i = 2; i < sieve.size(); ++i)
 	{
 		if (sieve[i] == 'x') continue;
+		// TODO: This can use multiplier initialization; a multiple check condition; a multiplier incr
 		for (int j = i + 1; j < sieve.size(); ++j)
 		{
 			if (j % i == 0)
