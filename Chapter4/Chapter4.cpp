@@ -90,21 +90,75 @@ void drill()
 	std::cout << "The sum in meters: " << sum << std::endl;
 
 	std::sort(all_values.begin(), all_values.end());
-	for (int i = 0; i < all_values.size(); i++) 
+	for (int i = 0; i < all_values.size(); ++i) 
 	{
 		std::cout << "Values entered: " << all_values[i] << (i == all_values.size() - 1 ? "\n" : ", ");
 	}
 	std::cout << "Values counted: " << value_count << std::endl;
 }
 
-void exercise_eleven() 
-{
+std::vector<int> prime;
 
+bool is_prime(int num)
+{
+	for (auto p : prime)
+	{
+		if (num % p == 0) return false;
+	}
+	return true;
+}
+
+void print_primes(int max)
+{
+	prime.push_back(2);
+
+	for (int i = 3; i <= 100; ++i)
+	{
+		if (is_prime(i))
+		{
+			prime.push_back(i); // add new largest prime
+		}
+	}
+
+	for (const auto& p : prime)
+	{
+		std::cout << p << ", ";
+	}
+
+	prime.clear();
+}
+
+void exercise_twelve() 
+{
+	print_primes(200);
+}
+
+void exercise_thirteen()
+{
+	int max = 100;
+	std::vector<char> sieve(max+1);
+	for (int i = 2; i < sieve.size(); ++i)
+	{
+		if (sieve[i] == 'x') continue;
+		for (int j = i + 1; j < sieve.size(); ++j)
+		{
+			if (j % i == 0)
+			{
+				sieve[j] = 'x';
+			}
+		}
+	}
+
+	std::cout << "Numbers without an 'x' are prime" << std::endl;
+	for (int i = 2; i < sieve.size(); ++i) 
+	{
+		std::cout << i << ". " << sieve[i] << std::endl;
+	}
 }
 
 int main()
 {
-	drill();
+	exercise_thirteen();
 
 	return 0;
 }
