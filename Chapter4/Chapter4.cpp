@@ -101,13 +101,10 @@ std::vector<int> prime;
 
 bool is_prime(int num)
 {
-	int count = 0;
 	for (auto p : prime)
 	{
 		if (num % p == 0) return false;
-		++count;
 	}
-	std::cout << "Iterated " << count << " times for " << num << std::endl;
 	return true; // not divisible by smaller primes
 }
 
@@ -146,13 +143,10 @@ void exercise_thirteen()
 	for (int i = 2; i < sieve.size(); ++i)
 	{
 		if (sieve[i] == 'x') continue;
-		// TODO: This can use multiplier initialization; a multiple check condition; a multiplier incr
-		for (int j = i + 1; j < sieve.size(); ++j)
+
+		for (int m = i; i * m <= sieve.size(); ++m)
 		{
-			if (j % i == 0)
-			{
-				sieve[j] = 'x';
-			}
+			sieve[i * m] = 'x';
 		}
 	}
 
@@ -165,8 +159,16 @@ void exercise_thirteen()
 
 int main()
 {
-	exercise_twelve();
-	//exercise_thirteen();
+	auto start = std::chrono::high_resolution_clock::now();
+
+	//exercise_twelve();
+	exercise_thirteen();
+
+	auto elapsed = std::chrono::high_resolution_clock::now() - start;
+	long long millis = std::chrono::duration_cast<std::chrono::milliseconds>(
+		elapsed).count();
+
+	std::cout << "Time elapsed: " << millis << std::endl;
 
 	return 0;
 }
