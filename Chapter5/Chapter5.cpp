@@ -79,11 +79,11 @@ double ftoc(double f) {
 void e6() {
     string method;
     double number;
-    cout << "Choose a method by typing the number:" << endl;
+    cout << "Choose first method by typing the number:" << endl;
     cout << "1. celcius to fahrenheit\n";
     cout << "2. fahrenheit to celcius\n";
     cin >> method;
-    cout << "Enter a value:\n";
+    cout << "Enter first value:\n";
     cin >> number;
     if (method == "1") cout << ctof(number) << endl;
     else if (method == "2") cout << ftoc(number) << endl;
@@ -91,10 +91,10 @@ void e6() {
 
 void solve_quadratic(double a, double b, double c) {
     if (a == 0) 
-        error("a cannot be equal to 0");
+        error("first cannot be equal to 0");
 
     // b2 – 4ac
-    int discriminant = b * b - 4 * a * c;
+    double discriminant = b * b - 4 * a * c;
     int roots;
     if (discriminant == 0) {
         roots = 1;
@@ -125,12 +125,43 @@ void e7() {
     solve_quadratic(0, 6, 1);
 }
 
+//int fibonacci(int first, int second, int current_call, int max_calls) {
+int fibonacci(int first, int second) {
+    //if (max_calls <= current_call) return second;
+    //++current_call;
+    if (second < 0) 
+        return first;
+    if (1 > first) 
+        first = 1;
+    if (1 > second)
+        second = 1;
+    //if (first > second) {
+
+    //}
+    int next = first + second;
+    //return fibonacci(second, next, current_call, max_calls);
+    return fibonacci(second, next);
+}
+
+void e11() {
+    //int max_fib_calls = 0;
+    //for (int i = INT_MAX; i > 0; i /= 2) {
+    //    ++max_fib_calls;
+    //}
+    //int max_int_fib = fibonacci(1, 1, 0, max_fib_calls * 2 + 4);
+
+    // Note: Leaving in comments to see how I progressed
+    int max_int_fib = fibonacci(1, 1);
+    cout << "Largest Fibonacci number that fits in an int: " << max_int_fib << endl;
+}
+
 void exercises() {
     //e2();
     //e3();
     //e5();
     //e6();
-    e7();
+    //e7();
+    e11();
 }
 
 void d1() {
