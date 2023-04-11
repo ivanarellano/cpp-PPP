@@ -89,11 +89,45 @@ void e6() {
     else if (method == "2") cout << ftoc(number) << endl;
 }
 
+void solve_quadratic(double a, double b, double c) {
+    // b2 – 4ac
+    int discriminant = b * b - 4 * a * c;
+    int roots;
+    if (discriminant == 0) {
+        roots = 1;
+    }
+    else if (discriminant > 0) {
+        roots = 2;
+    }
+    else {
+        cout << "The quadratic equation has no real roots." << endl; 
+        return;
+    }
+    cout << "Discriminant: " << discriminant << endl;
+
+    double sqrt_term = sqrt(discriminant);
+    double root_1, root_2;
+
+    if (1 < roots) {
+        root_1 = (-1 * b + sqrt_term) / (2 * a);
+        cout << "Root 1: " << root_1 << endl;
+    }
+    if (roots == 2) {
+        root_2 = (-1 * b - sqrt_term) / (2 * a);
+        cout << "Root 2: " << root_2 << endl;
+    }
+}
+
+void e7() {
+    solve_quadratic(5, 6, 1);
+}
+
 void exercises() {
     //e2();
     //e3();
     //e5();
-    e6();
+    //e6();
+    e7();
 }
 
 void d1() {
