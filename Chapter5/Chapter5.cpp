@@ -90,6 +90,9 @@ void e6() {
 }
 
 void solve_quadratic(double a, double b, double c) {
+    if (a == 0) 
+        error("a cannot be equal to 0");
+
     // b2 – 4ac
     int discriminant = b * b - 4 * a * c;
     int roots;
@@ -119,7 +122,7 @@ void solve_quadratic(double a, double b, double c) {
 }
 
 void e7() {
-    solve_quadratic(5, 6, 1);
+    solve_quadratic(0, 6, 1);
 }
 
 void exercises() {
