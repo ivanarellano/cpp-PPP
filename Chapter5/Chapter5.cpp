@@ -125,32 +125,23 @@ void e7() {
     solve_quadratic(0, 6, 1);
 }
 
-//int fibonacci(int first, int second, int current_call, int max_calls) {
 int fibonacci(int first, int second) {
-    //if (max_calls <= current_call) return second;
-    //++current_call;
-    if (second < 0) 
-        return first;
+    // This works but it depends on an overflow
+    //if (second < 0) return first;
+    
+    // This is reliable
+    if (INT_MAX - second < first) return second;
+
     if (1 > first) 
         first = 1;
     if (1 > second)
         second = 1;
-    //if (first > second) {
 
-    //}
     int next = first + second;
-    //return fibonacci(second, next, current_call, max_calls);
     return fibonacci(second, next);
 }
 
 void e11() {
-    //int max_fib_calls = 0;
-    //for (int i = INT_MAX; i > 0; i /= 2) {
-    //    ++max_fib_calls;
-    //}
-    //int max_int_fib = fibonacci(1, 1, 0, max_fib_calls * 2 + 4);
-
-    // Note: Leaving in comments to see how I progressed
     int max_int_fib = fibonacci(1, 1);
     cout << "Largest Fibonacci number that fits in an int: " << max_int_fib << endl;
 }
