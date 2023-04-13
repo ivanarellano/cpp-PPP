@@ -20,6 +20,9 @@
 #include "stdafx.h"
 #include "../../std_lib_facilities.h"
 
+constexpr char ExitChar = 'x';
+constexpr char PrintChar = '=';
+
 //------------------------------------------------------------------------------
 
 class Token {
@@ -76,8 +79,8 @@ Token Token_stream::get()
     cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
 
     switch (ch) {
-    case ';':    // for "print"
-    case 'q':    // for "quit"
+    case PrintChar:    // for "print"
+    case ExitChar:    // for "quit"
     case '(': case ')': case '+': case '-': case '*': case '/':
         return Token(ch);        // let each character represent itself
     case '.':
@@ -179,14 +182,18 @@ double expression()
 //------------------------------------------------------------------------------
 
 int main() {
+    cout << "Welcome to our simple calculator." << endl <<
+        "Please enter expressions using floating-point numbers." << endl;
+    cout << "The available operators are: +, -, *, and /" << endl <<
+        "To print the calculation enter \";\". To exit enter \"x\"." << endl;
     try
     {
         while (cin) {
             double val = 0;
             Token t = ts.get();
 
-            if (t.kind == 'q') break; // 'q' for quit
-            if (t.kind == ';')        // ';' for "print now"
+            if (t.kind == ExitChar) break; // 'q' for quit
+            if (t.kind == PrintChar)        // ';' for "print now"
                 cout << "=" << val << '\n';
             else
                 ts.putback(t);
