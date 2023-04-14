@@ -107,15 +107,18 @@ double expression();    // declaration so that primary() can call expression()
 
 //------------------------------------------------------------------------------
 
-int factorial(int num) {
-    if (num == 0) return 1;
-
-    int cur_val = num;
-    for (int i = 1; i < num; ++i) {
-        cur_val *= i;
+int factorial(int n)
+// return n*(n-1)*(n-2)* ... *2
+// return 1 if n<1
+{
+    if (n == 0) return 1;
+    int fac = 1;
+    while (1 < n) {
+        fac *= n;
+        --n;
+        if (fac < 1) error("factorial overflow");
     }
-
-    return cur_val;
+    return fac;
 }
 
 // deal with numbers and parentheses
@@ -221,11 +224,11 @@ double expression()
 
 //------------------------------------------------------------------------------
 
-int main() {
+int e3() {
     cout << "Welcome to our simple calculator." << endl <<
         "Please enter expressions using floating-point numbers." << endl;
     cout << "The available operators are: +, -, *, and /" << endl <<
-        "To print the calculation enter \"" << PrintChar << 
+        "To print the calculation enter \"" << PrintChar <<
         "\". To exit enter \"" << ExitChar << "\"." << endl;
     try
     {
@@ -253,5 +256,64 @@ int main() {
         keep_window_open();
         return 2;
     }
+}
+
+//------------------------------------------------------------------------------
+
+int permutations(int a, int b) {
+    /*
+    * A permutation is an ordered subset of a set. For example, say you wanted to
+    * pick a combination to a vault. There are 60 possible numbers, and you need
+    * three different numbers for the combinations. There are P(60,3) permutations
+    * for the combination.
+    */
+    return factorial(a) / factorial(a - b);
+}
+
+int combinations(int a, int b) {
+    /*
+    * Combinations are similar to permutations, except that the order of the objects
+    * doesn't matter. For example, if you were making a "banana split" sundae and
+    * wished to use three different flavors of ice cream out of five that you had,
+    * you wouldn't care if you used a scoop of vanilla at the beginning or the end;
+    * you would still have used vanilla.
+    */
+    return permutations(a, b) / factorial(b);
+}
+
+int e10() {
+    /*
+    * Requirements: Calculate permutations for two numbers, calculate combinations 
+    * for two numbers, allow the user to input two numbers to use for calculation method
+    * Design:
+    * Ask to input sequence in the order of 1) method 2) number 3) number
+    * Calculate using chosen method and numbers
+    */
+    int type, a, b;
+    cout << "Chose a method number, followed by two numbers. Example: 1 10 2 calculates permutations for 10 and 2\n";
+    cout << "Methods\n";
+    cout << "1. Calculate permutations\n";
+    cout << "2. Calculate combinations\n";
+    cin >> type >> a >> b;
+
+    if (type == 1) {
+        // Permutations
+        cout << "P(" << a << ',' << b << ") = " << permutations(a, b) << endl;
+    }
+    else if (type == 2) {
+        // Combinations
+        cout << "C(" << a << ',' << b << ") = " << combinations(a, b) << endl;
+    }
+    else {
+        error("No supported method type found");
+    }
+    keep_window_open();
+    return 0;
+}
+
+int main() {
+    //return e3();
+    return e10();
+    return 0;
 }
 //------------------------------------------------------------------------------
