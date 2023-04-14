@@ -139,6 +139,7 @@ double term()
         case '*':
             left *= primary();
             t = ts.get();
+            break;
         case '/':
         {
             double d = primary();
@@ -185,15 +186,17 @@ int main() {
     cout << "Welcome to our simple calculator." << endl <<
         "Please enter expressions using floating-point numbers." << endl;
     cout << "The available operators are: +, -, *, and /" << endl <<
-        "To print the calculation enter \";\". To exit enter \"x\"." << endl;
+        "To print the calculation enter \"" << PrintChar << 
+        "\". To exit enter \"" << ExitChar << "\"." << endl;
     try
     {
+        double val = 0;
+
         while (cin) {
-            double val = 0;
             Token t = ts.get();
 
-            if (t.kind == ExitChar) break; // 'q' for quit
-            if (t.kind == PrintChar)        // ';' for "print now"
+            if (t.kind == ExitChar) break; // 'x' for quit
+            if (t.kind == PrintChar)       // '=' for "print now"
                 cout << "=" << val << '\n';
             else
                 ts.putback(t);
