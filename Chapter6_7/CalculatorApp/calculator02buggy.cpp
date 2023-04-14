@@ -81,7 +81,7 @@ Token Token_stream::get()
     switch (ch) {
     case PrintChar:    // for "print"
     case ExitChar:    // for "quit"
-    case '(': case ')': case '+': case '-': case '*': case '/':
+    case '{': case '}': case '(': case ')': case '+': case '-': case '*': case '/':
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
@@ -112,6 +112,13 @@ double primary()
 {
     Token t = ts.get();
     switch (t.kind) {
+    case '{':    // handle '{' expression '}'
+    {
+        double d = expression();
+        t = ts.get();
+        if (t.kind != '}') error("'}' expected");
+        return d;
+    }
     case '(':    // handle '(' expression ')'
     {
         double d = expression();
