@@ -81,7 +81,7 @@ Token Token_stream::get()
     switch (ch) {
     case PrintChar:    // for "print"
     case ExitChar:    // for "quit"
-    case '{': case '}': case '(': case ')': case '+': case '-': case '*': case '/':
+    case '{': case '}': case '(': case ')': case '+': case '-': case '*': case '/': case '!':
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
@@ -106,6 +106,17 @@ Token_stream ts;        // provides get() and putback()
 double expression();    // declaration so that primary() can call expression()
 
 //------------------------------------------------------------------------------
+
+int factorial(int num) {
+    if (num == 0) return 1;
+
+    int cur_val = num;
+    for (int i = 1; i < num; ++i) {
+        cur_val *= i;
+    }
+
+    return cur_val;
+}
 
 // deal with numbers and parentheses
 double primary()
@@ -135,21 +146,42 @@ double primary()
 
 //------------------------------------------------------------------------------
 
+// deal with !
+double factorial_expression()
+{
+    double left = primary();
+    Token t = ts.get();
+
+    while (true) {
+        switch (t.kind) {
+        case '!':
+        {
+            left = factorial(left);
+            t = ts.get();
+            break;
+        }
+        default:
+            ts.putback(t);
+            return left;
+        }
+    }
+}
+
 // deal with *, /, and %
 double term()
 {
-    double left = primary();
+    double left = factorial_expression();
     Token t = ts.get();        // get the next token from token stream
 
     while (true) {
         switch (t.kind) {
         case '*':
-            left *= primary();
+            left *= factorial_expression(); // 2*4! = 2*(4!)
             t = ts.get();
             break;
         case '/':
         {
-            double d = primary();
+            double d = factorial_expression(); // 2/4! = 2/(4!)
             if (d == 0) error("divide by zero");
             left /= d;
             t = ts.get();
