@@ -27,4 +27,8 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		shared\shared.vcxitems*{680f7cf7-313b-475e-8ce6-0aa74117e3e3}*SharedItemsImports = 4
+		shared\shared.vcxitems*{ac2b0d07-1de1-493c-89b5-1aad8d8f2283}*SharedItemsImports = 9
+	EndGlobalSection
 EndGlobal
