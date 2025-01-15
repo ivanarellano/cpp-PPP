@@ -1,8 +1,14 @@
 #include "../shared/headers/PPPheaders.h"
 
-int main()
-{
-    drill();
+static void exercise_02() {
+    // Write a program in C++ that converts from miles to km.
+    int miles;
+    cout << "Enter the miles to convert to kilometers: ";
+    cin >> miles;
+    if (miles < 1)
+        simple_error("it has to be positive");
+    double kilometers = miles * 1.609;
+    cout << "\nKilometers: " << kilometers << '\n';
 }
 
 static void drill() {
@@ -49,4 +55,10 @@ static void try_this_2_5_1() {
             cout << "repeated word: " << current << '\n';
         previous = current;
     }
+}
+
+int main()
+{
+    //drill();
+    exercise_02();
 }
