@@ -11,6 +11,28 @@ static void exercise_02() {
     cout << "\nKilometers: " << kilometers << '\n';
 }
 
+static void exercise_04() {
+    int val1, val2;
+    cout << "Enter the first value, followed by Enter key, then enter the second value" << '\n';
+    cin >> val1 >> val2;
+    if (val1 == 0 || val2 == 0)
+        simple_error("it has to be positive");
+    double larger, smaller;
+    if (val1 > val2) {
+        larger = val1;
+        smaller = val2;
+    }
+    else {
+        larger = val2;
+        smaller = val1;
+    }
+    cout << "Larger, smaller: " << larger << ", " << smaller << '\n'
+         << "Sum: " << val1 + val2 << '\n'
+         << "Difference: " << larger - smaller << '\n'
+         << "Product: " << val1 * val2 << '\n'
+         << "Ratio: " << smaller / larger << '\n';
+}
+
 static void drill() {
     string first_name;
     cout << "Enter the name of the person you want to write to" << '\n';
@@ -60,5 +82,6 @@ static void try_this_2_5_1() {
 int main()
 {
     //drill();
-    exercise_02();
+    //exercise_02();
+    exercise_04();
 }
