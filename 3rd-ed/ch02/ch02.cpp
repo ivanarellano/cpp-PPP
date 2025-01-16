@@ -33,6 +33,88 @@ static void exercise_04() {
          << "Ratio: " << smaller / larger << '\n';
 }
 
+static void exercise_06() {
+    int val1, val2, val3, temp;
+    cout << "Enter three integer values" << '\n';
+    cin >> val1 >> val2 >> val3;
+    if (val1 > val2) {
+        temp = val1;
+        val1 = val2;
+        val2 = temp;
+    }
+    if (val2 > val3) {
+        temp = val2;
+        val2 = val3;
+        val3 = temp;
+    }
+    if (val1 > val2) {
+        temp = val1;
+        val1 = val2;
+        val2 = temp;
+    }
+    cout << val1 << ", " << val2 << ", " << val3 << '\n';
+}
+
+static void exercise_07() {
+    string val1, val2, val3, temp;
+    cout << "Enter three string values" << '\n';
+    cin >> val1 >> val2 >> val3;
+    if (val1 > val2) {
+        temp = val1;
+        val1 = val2;
+        val2 = temp;
+    }
+    if (val2 > val3) {
+        temp = val2;
+        val2 = val3;
+        val3 = temp;
+    }
+    if (val1 > val2) {
+        temp = val1;
+        val1 = val2;
+        val2 = temp;
+    }
+    cout << val1 << ", " << val2 << ", " << val3 << '\n';
+}
+
+static void exercise_08() {
+    int val;
+    cout << "Enter an integer value" << '\n';
+    cin >> val;
+    if (val % 2 == 0)
+        cout << "The value " << val << " is an even number" << '\n';
+    else
+        cout << "The value " << val << " is an odd number" << '\n';
+}
+
+static void exercise_09() {
+    string val;
+    cout << "Enter a number from zero to nine" << '\n';
+    while (cin >> val) {
+        if (val == "zero")
+            cout << '0' << '\n';
+        else if (val == "one")
+            cout << '1' << '\n';
+        else if (val == "two")
+            cout << '2' << '\n';
+        else if (val == "three")
+            cout << '3' << '\n';
+        else if (val == "four")
+            cout << '4' << '\n';
+        else if (val == "five")
+            cout << '5' << '\n';
+        else if (val == "six")
+            cout << '6' << '\n';
+        else if (val == "seven")
+            cout << '7' << '\n';
+        else if (val == "eight")
+            cout << '8' << '\n';
+        else if (val == "nine")
+            cout << '9' << '\n';
+        cout << "Enter a number from zero to nine" << '\n';
+    }
+}
+
 static void drill() {
     string first_name;
     cout << "Enter the name of the person you want to write to" << '\n';
@@ -83,5 +165,7 @@ int main()
 {
     //drill();
     //exercise_02();
-    exercise_04();
+    //exercise_04();
+    //exercise_06();
+    exercise_09();
 }
