@@ -7,7 +7,8 @@
 	We have inserted 3 bugs that the compiler will catch and 3 that it won't.
 */
 
-#include "std_lib_facilities.h"
+#include "../std_lib_facilities.h"
+#include <string>
 
 struct Token {
 	char kind;
@@ -15,16 +16,22 @@ struct Token {
 	string name;
 	Token(char ch) :kind(ch), value(0) { }
 	Token(char ch, double val) :kind(ch), value(val) { }
+	Token(char ch, string s) :kind(ch), name(s) {}
 };
 
 class Token_stream {
 	bool full;
 	Token buffer;
 public:
-	Token_stream() :full(0), buffer(0) { }
+	// The constructor just sets full to indicate that the buffer is empty:
+	Token_stream() :full(false), buffer(0) { } // no Token in buffer
 
 	Token get();
-	void unget(Token t) { buffer = t; full = true; }
+	void unget(Token t) { 
+		if (full) error("unget() into a full buffer");
+		buffer = t; 
+		full = true; 
+	}
 
 	void ignore(char);
 };
