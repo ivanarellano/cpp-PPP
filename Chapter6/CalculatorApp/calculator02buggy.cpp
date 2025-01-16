@@ -17,6 +17,8 @@
 
 */
 
+// Annotated version: https://gist.github.com/cortical-iv/4c19719bbce455ec3f2d043fa011d638
+
 #include "stdafx.h"
 #include "../../std_lib_facilities.h"
 
