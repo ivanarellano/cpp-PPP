@@ -89,7 +89,7 @@ static void exercise_08() {
 
 static void exercise_09() {
     string val;
-    cout << "Enter a number from zero to nine" << '\n';
+    cout << "Enter a number from zero to four" << '\n';
     while (cin >> val) {
         if (val == "zero")
             cout << '0' << '\n';
@@ -101,18 +101,16 @@ static void exercise_09() {
             cout << '3' << '\n';
         else if (val == "four")
             cout << '4' << '\n';
-        else if (val == "five")
-            cout << '5' << '\n';
-        else if (val == "six")
-            cout << '6' << '\n';
-        else if (val == "seven")
-            cout << '7' << '\n';
-        else if (val == "eight")
-            cout << '8' << '\n';
-        else if (val == "nine")
-            cout << '9' << '\n';
+        else
+            cout << "not a number I know" << '\n';
         cout << "Enter a number from zero to nine" << '\n';
     }
+}
+
+static void exercise_10() {
+    string operation;
+    double operand1, operand2;
+    cin >> operation >> operand1 >> operand2;
 }
 
 static void drill() {
