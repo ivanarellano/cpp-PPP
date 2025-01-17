@@ -1,5 +1,10 @@
 #include "../shared/headers/PPPheaders.h"
 
+/*
+    See 2nd-ed/Chapter3/Chapter3.cpp for:
+    - exercise 10
+*/
+
 static void exercise_02() {
     // Write a program in C++ that converts from miles to km.
     int miles;
@@ -107,10 +112,63 @@ static void exercise_09() {
     }
 }
 
-static void exercise_10() {
-    string operation;
-    double operand1, operand2;
-    cin >> operation >> operand1 >> operand2;
+static void exercise_11() {
+    int pennies, nickles, dimes, quarters, half_quarters, dollar_coins;
+    cout << "How many pennies do you have?\n";
+    cin >> pennies;
+    cout << "How many nickles do you have?\n";
+    cin >> nickles;
+    cout << "How many dimes do you have?\n";
+    cin >> dimes;
+    cout << "How many quarters do you have?\n";
+    cin >> quarters;
+    cout << "How many half quarters do you have?\n";
+    cin >> half_quarters;
+    cout << "How many dollar coins do you have?\n";
+    cin >> dollar_coins;
+
+    string penny_out, nickles_out, dimes_out, quarters_out, half_quarters_out, dollar_coints_out;
+    if (pennies == 1)
+        penny_out = " penny\n";
+    else
+        penny_out = " pennies\n";
+    if (nickles == 1)
+        nickles_out = " nickle\n";
+    else
+        nickles_out = " nickles\n";
+    if (dimes == 1)
+        dimes_out = " dime\n";
+    else
+        dimes_out = " dimes\n";
+    if (quarters == 1)
+        quarters_out = " quarter\n";
+    else
+        quarters_out = " quarters\n";
+    if (half_quarters == 1)
+        half_quarters_out = " half quarter\n";
+    else
+        half_quarters_out = " half quarters\n";
+    if (dollar_coins == 1)
+        dollar_coints_out = " dollar coin\n";
+    else
+        dollar_coints_out = " dollar coins\n";
+
+    int total_in_cents = pennies +
+        nickles * 5 +
+        dimes * 10 +
+        quarters * 25 +
+        half_quarters * 50 +
+        dollar_coins * 100;
+    double total_dollars = total_in_cents / 100.0;
+
+    cout << "You have " << pennies << penny_out
+        << "You have " << nickles << nickles_out
+        << "You have " << dimes << dimes_out
+        << "You have " << quarters << quarters_out
+        << "You have " << half_quarters << half_quarters_out
+        << "You have " << dollar_coins << dollar_coints_out
+        << "The value of all your coins is " << "$" << total_dollars << "\n"
+        << "    or " << total_in_cents << " cents.\n";
 }
 
 static void drill() {
@@ -165,5 +223,6 @@ int main()
     //exercise_02();
     //exercise_04();
     //exercise_06();
-    exercise_09();
+    //exercise_09();
+    exercise_11();
 }
